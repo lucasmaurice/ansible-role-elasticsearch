@@ -33,6 +33,7 @@
     networks:
       - name: "{{ elasticsearch_docker_network }}"
   notify: restart elasticsearch
+  tags: molecule-notest
 
 - name: Create elasticsearch service file
   template:
@@ -48,3 +49,4 @@
     state: started
     enabled: true
   when: elasticsearch_enabled | bool
+  tags: molecule-notest
