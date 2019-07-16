@@ -1,7 +1,5 @@
 # Ansible Role: Elasticsearch [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![pipeline status](https://gitlab.effenco.com/infrastructure/ansible-roles/elasticsearch/badges/master/pipeline.svg)](https://gitlab.effenco.com/infrastructure/ansible-roles/elasticsearch/commits/master)
 
-# TODO: ADDAPT THE README!
-
 Install a dockerized version of Elasticsearch on an host.
 
 ## Role Dependancies
