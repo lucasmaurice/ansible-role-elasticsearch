@@ -17,7 +17,7 @@
     hostname: "{{ elasticsearch_docker_hostname }}"
     image: "{{ elasticsearch_docker_image }}:{{ elasticsearch_version }}"
     ports:
-      - "{{ elasticsearch_http_bind }}:9200"
+      - "{{ elasticsearch_http_host }}:{{ elasticsearch_http_port }}:9200"
     volumes:
       - "{{ elasticsearch_path }}/logs:/usr/share/elasticsearch/logs:Z"
       - esdata01:/usr/share/elasticsearch/data

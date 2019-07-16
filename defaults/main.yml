@@ -16,7 +16,6 @@ elasticsearch_docker_network: elk
 # Http network bind settings
 elasticsearch_http_host: 0.0.0.0
 elasticsearch_http_port: 9200
-elasticsearch_http_bind: "{{ elasticsearch_http_host }}:{{ elasticsearch_http_port }}"
 
 # Name of the elasticsearch cluster
 elasticsearch_cluster_name: effenco-elk-cluster

@@ -14,40 +14,57 @@ Available variables are listed below, along with default values (see defaults/ma
 
 ```yaml
 ---
-MOTD_CONTACT: sysadmin@lanets.ca
+# The docker image and version used to create the service
+elasticsearch_docker_image: docker.elastic.co/elasticsearch/elasticsearch-oss
+elasticsearch_version: 7.2.0
 
-# Name of the interfaces to read the Ip address.
-MOTD_PRIVATE_INTERFACE: x
-MOTD_PUBLIC_INTERFACE: x
+# The name of the service / container
+elasticsearch_docker_name: es
+elasticsearch_docker_hostname: "{{ elasticsearch_docker_name }}"
 
-# Welcome message and font. Select a font here: http://www.figlet.org/fontdb.cgi
-MOTD_WELCOME_FONT: banner3
-MOTD_WELCOME: DHMTL
+# If the service have to be started
+elasticsearch_enabled: true
 
-# Users to disable default motd
-users: []
+# The docker network in which to add the container
+elasticsearch_docker_network: elk
+
+# Http network bind settings
+elasticsearch_http_host: 0.0.0.0
+elasticsearch_http_port: 9200
+
+# Name of the elasticsearch cluster
+elasticsearch_cluster_name: effenco-elk-cluster
+
+# Root directory of elasticsearch
+elasticsearch_path: /opt/elasticsearch
 ```
 
-- `MOTD_CONTACT`: The contact email address to show.
+- `elasticsearch_docker_image`: The origin image you want to use.
 
-- `MOTD_PRIVATE_INTERFACE`: Network interface you want to read the private Ip address to show.
+- `elasticsearch_version`: The version of Elasticsearch you want to install.
 
-- `MOTD_PUBLIC_INTERFACE`: Network interface you want to read the public Ip address to show.
+- `elasticsearch_docker_name`: The name of the docker container and service.
 
-> Set the network interface to *x* or do not set it for no interface.
+- `elasticsearch_docker_hostname`: The hostname of the docker inside of the docker network.
 
-- `MOTD_WELCOME_FONT`: The font of the welcome word. (Select a font on the [Figlet Website](http://www.figlet.org/fontdb.cgi))
+- `elasticsearch_enabled`: If the service is enabled or not.
 
-- `MOTD_WELCOME`: The welcome word.
+- `elasticsearch_docker_network`: The name of the docker network to join.
 
-- `users`: Global variable containing all the users. Will disable the default motd on all listed users.
+- `elasticsearch_http_host`: The hostname to expose for http.
+
+- `elasticsearch_http_port`: The port to expose for http.
+
+- `elasticsearch_cluster_name`: The name of the Elasticsearch cluster.
+
+- `elasticsearch_path`: The path to elasticsearch on the host.
 
 ## Example Playbook
 
 This is an example of how to use this role:
 
 ```yaml
-    - hosts: servers
+    - hosts: monitoring
         roles:
             - docker
             - { role: elasticsearch }
