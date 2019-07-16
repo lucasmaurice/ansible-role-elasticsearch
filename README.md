@@ -1,8 +1,12 @@
-# Ansible Role: Linux Motd [![Build Status](https://travis-ci.org/lucasmaurice/ansible-role-linux-motd.svg?branch=master)](https://travis-ci.org/lucasmaurice/ansible-role-linux-motd)
+# Ansible Role: Elasticsearch [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![pipeline status](https://gitlab.effenco.com/infrastructure/ansible-roles/elasticsearch/badges/master/pipeline.svg)](https://gitlab.effenco.com/infrastructure/ansible-roles/elasticsearch/commits/master)
 
 # TODO: ADDAPT THE README!
 
-Install a standardized welcome message on a **Debian** or a **RedHat** host.
+Install a dockerized version of Elasticsearch on an host.
+
+## Role Dependancies
+
+- Docker deployed on the host (Tested with [geerlingguy.docker](https://galaxy.ansible.com/geerlingguy/docker/))
 
 ## Role Variables
 
@@ -45,53 +49,10 @@ This is an example of how to use this role:
 ```yaml
     - hosts: servers
         roles:
-            - { role: linux-motd,
-                MOTD_CONTACT: sysadmin@dhmtl.ca,
-                MOTD_PRIVATE_INTERFACE: eth0,
-                MOTD_WELCOME_FONT: banner3,
-                MOTD_WELCOME: DHMTL
-                }
-```
-
-This is the example result, **without colorization**:
-
-```text
-Welcome to DJLS-DOMOTIC managed by sysadmin@lanets.ca
-
-Running on Debian GNU/Linux 9 with kernel 4.15.17-1-pve
-
-
-########  ##     ## ##     ## ######## ##
-##     ## ##     ## ###   ###    ##    ##
-##     ## ##     ## #### ####    ##    ##
-##     ## ######### ## ### ##    ##    ##
-##     ## ##     ## ##     ##    ##    ##
-##     ## ##     ## ##     ##    ##    ##
-########  ##     ## ##     ##    ##    ########
-
- █ System date.........: Mon May 27 17:35:06 EDT 2019
- █ Uptime..............: 5d 17h 30m 31s
- █ CPU usage...........: 0.52, 0.39, 0.40
- █ Memory used.........: 257 MB / 1024 MB
- █ Swap in use.........: 0 MB 
- █ IP on Internet......: 189.178.145.123
- █ Private IP..........: 192.168.1.123/24 / 192.168.1.255
-
- ____________________________________
-/ First Law of Bicycling:            \
-|                                    |
-| No matter which way you ride, it's |
-\ uphill and against the wind.       /
- ------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-root@djls-domotic:~$
+            - docker
+            - { role: elasticsearch }
 ```
 
 ## License
 
-[![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)](https://http://www.wtfpl.net)
+MIT

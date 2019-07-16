@@ -1,10 +1,10 @@
 ---
 galaxy_info:
-  author: # TODO: Set your name
-  description: # TODO: Set the role description
-  company: DreamHack Canada Inc.
+  author: Lucas Maurice
+  description: This is a role for install a docker of Elasticsearch.
+  company: Effenco
 
-  license: WTFPL
+  license: MIT
 
 
   # If the issue tracker for your role is not on github, uncomment the next line and provide a value
@@ -39,6 +39,6 @@ galaxy_info:
   # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
   #       Maximum 20 tags per role.
 
-  dependencies: []
-  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
-  # if you add dependencies to this list.
+  dependencies:
+    - geerlingguy.docker
+
