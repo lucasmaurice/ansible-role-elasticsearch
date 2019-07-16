@@ -25,4 +25,3 @@ test:
     - molecule --version
     - ansible --version
     - molecule test
-

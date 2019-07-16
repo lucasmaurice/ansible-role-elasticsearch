@@ -32,19 +32,19 @@
       - "nofile:65536:65536"
     networks:
       - name: "{{ elasticsearch_docker_network }}"
-  notify: restart elasticsearch 
+  notify: restart elasticsearch
 
 - name: Create elasticsearch service file
   template:
     dest: "/etc/systemd/system/{{ elasticsearch_docker_name }}.service"
     src: "elasticsearch.service.j2"
     mode: 0664
-  notify: restart elasticsearch 
+  notify: restart elasticsearch
   when: ansible_service_mgr == 'systemd'
 
 - name: Enable elasticsearch service
   service:
     name: "{{ elasticsearch_docker_name }}.service"
     state: started
-    enabled: yes
+    enabled: true
   when: elasticsearch_enabled | bool
