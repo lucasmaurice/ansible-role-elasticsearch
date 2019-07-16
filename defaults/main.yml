@@ -1,2 +1,25 @@
 ---
-# All your roles default values.
+# The docker image and version used to create the service
+elasticsearch_docker_image: docker.elastic.co/elasticsearch/elasticsearch-oss
+elasticsearch_version: 7.2.0
+
+# The name of the service / container
+elasticsearch_docker_name: es
+elasticsearch_docker_hostname: "{{ elasticsearch_docker_name }}"
+
+# If the service have to be started
+elasticsearch_enabled: true
+
+# The docker network in which to add the container
+elasticsearch_docker_network: elk
+
+# Http network bind settings
+elasticsearch_http_host: 0.0.0.0
+elasticsearch_http_port: 9200
+elasticsearch_http_bind: "{{ elasticsearch_http_host }}:{{ elasticsearch_http_port }}"
+
+# Name of the elasticsearch cluster
+elasticsearch_cluster_name: effenco-elk-cluster
+
+# Root directory of elasticsearch
+elasticsearch_path: /opt/elasticsearch

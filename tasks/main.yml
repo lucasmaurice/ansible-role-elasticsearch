@@ -1,2 +1,50 @@
 ---
-# TODO: Set the role installation tasks.
+- name: Create elasticsearch logs directory
+  file:
+    path: "{{ elasticsearch_path }}/logs"
+    state: directory
+    mode: 0775
+    owner: 1000
+    group: 1000
+
+- name: Create the network for elasticsearch
+  docker_network:
+    name: "{{ elasticsearch_docker_network }}"
+
+- name: Start the main elastic node.
+  docker_container:
+    name: "{{ elasticsearch_docker_name }}"
+    hostname: "{{ elasticsearch_docker_hostname }}"
+    image: "{{ elasticsearch_docker_image }}:{{ elasticsearch_version }}"
+    ports:
+      - "{{ elasticsearch_http_bind }}:9200"
+    volumes:
+      - "{{ elasticsearch_path }}/logs:/usr/share/elasticsearch/logs:Z"
+      - esdata01:/usr/share/elasticsearch/data
+    env:
+      discovery.type: single-node
+      node.name: "{{ elasticsearch_docker_name }}"
+      cluster.name: "{{ elasticsearch_cluster_name }}"
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ulimits:
+      - "memlock:-1:-1"
+      - "nofile:65536:65536"
+    networks:
+      - name: "{{ elasticsearch_docker_network }}"
+  notify: restart elasticsearch 
+
+- name: Create elasticsearch service file
+  template:
+    dest: "/etc/systemd/system/{{ elasticsearch_docker_name }}.service"
+    src: "elasticsearch.service.j2"
+    mode: 0664
+  notify: restart elasticsearch 
+  when: ansible_service_mgr == 'systemd'
+
+- name: Enable elasticsearch service
+  service:
+    name: "{{ elasticsearch_docker_name }}.service"
+    state: started
+    enabled: yes
+  when: elasticsearch_enabled | bool
