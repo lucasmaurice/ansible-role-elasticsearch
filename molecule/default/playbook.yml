@@ -9,4 +9,5 @@
       when: ansible_os_family == 'Debian'
 
   roles:
+    - role: lucasmaurice.ansible_role_docker
     - role: elasticsearch

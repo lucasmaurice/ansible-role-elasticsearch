@@ -26,6 +26,7 @@ scenario:
   test_sequence:
     - lint
     - destroy
+    - dependency
     - syntax
     - create
     - converge

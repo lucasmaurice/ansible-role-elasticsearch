@@ -39,4 +39,4 @@ galaxy_info:
   #       Maximum 20 tags per role.
 
   dependencies:
-    - geerlingguy.docker
+    - lucasmaurice.ansible_role_docker
